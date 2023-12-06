@@ -1,5 +1,4 @@
 // These styles apply to every route in the application
-import NavBar from "@/components/navbar";
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
