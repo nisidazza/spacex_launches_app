@@ -1,12 +1,12 @@
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 
 export default async function AuthStatus() {
-  const session = await unstable_getServerSession();
+  const session = await getServerSession();
   return (
-    <div className="absolute top-5 w-full flex justify-center items-center">
+    <div>
       {session && (
-        <p className="text-stone-200 text-sm">
-          Signed in as {session.user?.email}
+        <p className="text-white text-sm font-bold">
+          Welcome {session.user?.name || "user"}!
         </p>
       )}
     </div>
