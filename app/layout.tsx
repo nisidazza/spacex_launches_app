@@ -1,10 +1,11 @@
 // These styles apply to every route in the application
+import AuthStatus from "@/components/auth-status";
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "react-hot-toast";
-import AuthStatus from "@/components/auth-status";
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
+import { Providers } from "./providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,7 +41,7 @@ export default async function RootLayout({
           {/* @ts-expect-error Async Server Component */}
           <AuthStatus />
         </Suspense>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
