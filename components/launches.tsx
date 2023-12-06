@@ -11,10 +11,14 @@ import {
   Heading,
   Image,
   Img,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
+import NextLink from "next/link";
+import { FaYoutube } from "react-icons/fa";
+import { MdFavorite } from "react-icons/md";
 
 export default async function Launches() {
   const { loading, error, data } = await getClient().query({
@@ -56,7 +60,11 @@ export default async function Launches() {
 
               <CardBody>
                 <Stack mt="0" spacing="2">
-                  <Heading size="md">{launch.mission_name}</Heading>
+                  <Box display="flex" justifyContent={"space-between"}>
+                    <Heading size="md">{launch.mission_name}</Heading>
+                    <MdFavorite />
+                  </Box>
+
                   <Box display="flex" alignItems="baseline">
                     <Box fontWeight="bold" color="gray.600">
                       Launch Date:{" "}
@@ -76,6 +84,9 @@ export default async function Launches() {
                       {launch.rocket.rocket_name}
                     </Text>
                   </Box>
+                  <Link as={NextLink} href={launch.links.video_link} isExternal>
+                    <FaYoutube />
+                  </Link>
                 </Stack>
               </CardBody>
             </Card>
