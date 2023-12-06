@@ -2,9 +2,14 @@ import { getClient } from "@/app/graphql/client";
 import { query } from "@/app/graphql/query";
 import { Launch } from "@/app/graphql/types";
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Box,
   Card,
   CardBody,
+  CircularProgress,
   Container,
   Grid,
   GridItem,
@@ -26,8 +31,20 @@ export default async function Launches() {
     context: { fetchOptions: { next: { revalidate: 5 } } },
   });
 
-  const launches = data.launchesPast as Launch[];
-  console.log(launches);
+  if (loading) return <CircularProgress isIndeterminate />;
+  if (error)
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>{error.name}</AlertTitle>
+        <AlertDescription>{error.message}</AlertDescription>
+      </Alert>
+    );
+
+  var launches = data.launchesPast as Launch[];
+  launches = launches.filter(
+    (launch) => launch.links.flickr_images.length > 0 && launch.links.video_link
+  );
 
   return (
     <Container maxW={"100%"} centerContent mt="50px">
@@ -40,7 +57,6 @@ export default async function Launches() {
           <GridItem w="100%" key={launch.id}>
             <Card>
               <Box maxW="sm" height={"300px"} overflow="hidden">
-                {/* <Center> */}
                 <Image
                   boxSize="100%"
                   src={launch.links.flickr_images[0]}
@@ -55,7 +71,6 @@ export default async function Launches() {
                     />
                   }
                 />
-                {/* </Center> */}
               </Box>
 
               <CardBody>
