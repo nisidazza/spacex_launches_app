@@ -20,17 +20,12 @@ const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
 });
 
-const title = "Next.js Prisma Postgres Auth Starter";
-const description =
-  "This is a Next.js starter kit that uses Next-Auth for simple email + password login and a Postgres database to persist the data.";
-
+const title = "Space X Launches";
 export const metadata: Metadata = {
   title,
-  description,
   twitter: {
     card: "summary_large_image",
     title,
-    description,
   },
   metadataBase: new URL("https://nextjs-postgres-auth.vercel.app"),
   themeColor: "#FFF",
@@ -49,9 +44,8 @@ export default async function RootLayout({
       >
         <Toaster />
         <Suspense fallback="Loading...">
-          {/* @ts-expect-error Async Server Component */}
+          <Providers>{children}</Providers>
         </Suspense>
-        <Providers>{children}</Providers>
       </body>
     </html>
   );
