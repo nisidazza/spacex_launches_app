@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 export const query = gql`
   query GetLaunches {
-    launchesPast(limit: 10, offset: 7) {
+    launchesPast {
       id
       mission_name
       details
