@@ -5,9 +5,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import Field from "./form/field";
-import Button from "./form/button";
-
+import Button from "./button";
+import Field from "./field";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);

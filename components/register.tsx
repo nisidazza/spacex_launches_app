@@ -4,9 +4,8 @@ import { Box, Center, Link, Stack, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import Field from "./form/field";
-import Button from "./form/button";
-
+import Button from "./button";
+import Field from "./field";
 
 export default function Register() {
   const [loading, setLoading] = useState(false);

@@ -1,4 +1,4 @@
-import LoadingDots from "../loading-dots";
+import LoadingDots from "./loading-dots";
 
 type Button = {
   loading: boolean;
