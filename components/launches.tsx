@@ -103,7 +103,7 @@ export default async function Launches() {
                     </HStack>
                   </Box>
                   <Link as={NextLink} href={launch.links.video_link} isExternal>
-                    <FaYoutube color="red" size={"30px"} />
+                    <FaYoutube color="red" size={"30px"} title="youtube-icon" />
                   </Link>
                 </Stack>
               </CardBody>
