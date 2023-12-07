@@ -3,7 +3,6 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
 import { Suspense } from "react";
-import { Toaster } from "react-hot-toast";
 import { Providers } from "./providers";
 
 const openSans = Open_Sans({
@@ -42,7 +41,7 @@ export default async function RootLayout({
         style={{ minHeight: "100vh" }}
         className={`${openSans.variable} ${robotoMono.variable} font-sans`}
       >
-        <Toaster />
+        {/* <Toaster /> */}
         <Suspense fallback="Loading...">
           <Providers>{children}</Providers>
         </Suspense>
