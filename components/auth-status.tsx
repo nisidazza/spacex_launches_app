@@ -6,10 +6,13 @@ export default async function AuthStatus() {
   return (
     <div>
       {session && (
-        <Text color={"white"} fontWeight={"bold"} display={"initial"}>
-          Welcome {
-          session.user?.user_name || null
-          }!
+        <Text
+          color={"white"}
+          fontWeight={"bold"}
+          display={"initial"}
+          fontSize="xl"
+        >
+          Welcome {session.user?.user_name || null}!
         </Text>
       )}
     </div>
