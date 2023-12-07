@@ -1,13 +1,12 @@
 import prisma from "@/lib/prisma";
-import { NextApiRequest, NextApiResponse } from "next";
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const { email, password } = await req.json();
+  const { user_name, password, job_title } = await req.json();
   const exists = await prisma.user.findUnique({
     where: {
-      email,
+      user_name,
     },
   });
   if (exists) {
@@ -15,8 +14,9 @@ export async function POST(req: Request) {
   } else {
     const user = await prisma.user.create({
       data: {
-        email,
+        user_name,
         password: await hash(password, 10),
+        job_title,
       },
     });
     return NextResponse.json(user);
