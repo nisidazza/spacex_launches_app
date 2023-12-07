@@ -7,7 +7,9 @@ export default async function AuthStatus() {
     <div>
       {session && (
         <Text color={"white"} fontWeight={"bold"} display={"initial"}>
-          Welcome {session.user?.name || null}!
+          Welcome {
+          session.user?.user_name || null
+          }!
         </Text>
       )}
     </div>
