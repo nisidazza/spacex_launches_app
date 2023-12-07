@@ -1,7 +1,6 @@
 import { IconButton } from "@chakra-ui/button";
-import { Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/menu";
+import { Menu, MenuButton, MenuList } from "@chakra-ui/menu";
 import { CgProfile } from "react-icons/cg";
-import { FaUserEdit } from "react-icons/fa";
 import SignOut from "./sign-out";
 
 export default async function Profile() {
@@ -17,9 +16,9 @@ export default async function Profile() {
         _active={{ background: "transparent" }}
       />
       <MenuList>
-        <MenuItem icon={<FaUserEdit size="20px" title="edit-profile" />}>
+        {/* <MenuItem icon={<FaUserEdit size="20px" title="edit-profile" />}>
           Edit profile
-        </MenuItem>
+        </MenuItem> */}
         <SignOut />
       </MenuList>
     </Menu>
