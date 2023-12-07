@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import AuthStatus from "./auth-status";
-import SignOut from "./sign-out";
+import Profile from "./profile";
 
 export default function NavBar() {
   return (
@@ -15,9 +15,8 @@ export default function NavBar() {
     >
       {/* @ts-expect-error Server Component */}
       <AuthStatus />
-      <SignOut />
+      {/* @ts-expect-error Server Component */}
+      <Profile />
     </Flex>
   );
 }
-
-//#0d0d0d,#000066, #800080, #cc4400
