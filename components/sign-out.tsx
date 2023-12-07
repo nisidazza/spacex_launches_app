@@ -5,7 +5,7 @@ export default function SignOut() {
   return (
     <button
       className=" hover:text-stone-200 transition-all font-bold"
-      style={{ color: "rgba(2, 0, 36, 1)" }}
+      style={{ color: "white" }}
       onClick={() => signOut()}
     >
       Sign out

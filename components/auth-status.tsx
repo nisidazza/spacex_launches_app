@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/react";
 import { getServerSession } from "next-auth/next";
 
 export default async function AuthStatus() {
@@ -5,9 +6,9 @@ export default async function AuthStatus() {
   return (
     <div>
       {session && (
-        <p className="text-white text-sm font-bold">
-          Welcome {session.user?.name || "user"}!
-        </p>
+        <Text color={"white"} fontWeight={"bold"} display={"initial"}>
+          Welcome {session.user?.name || null}!
+        </Text>
       )}
     </div>
   );

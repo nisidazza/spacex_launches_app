@@ -3,6 +3,8 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
 import { Suspense } from "react";
+import { Toaster } from "react-hot-toast";
+import backgroundImage from "../public/space_x.png";
 import { Providers } from "./providers";
 
 const openSans = Open_Sans({
@@ -30,6 +32,13 @@ export const metadata: Metadata = {
   themeColor: "#FFF",
 };
 
+const style = {
+  minHeight: "100vh",
+  backgroundImage: `url(${backgroundImage.src})`,
+  backgroundPosition: "center",
+  backgroundSize: "cover",
+};
+
 export default async function RootLayout({
   children,
 }: {
@@ -38,10 +47,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        style={{ minHeight: "100vh" }}
+        style={style}
         className={`${openSans.variable} ${robotoMono.variable} font-sans`}
       >
-        {/* <Toaster /> */}
+        <Toaster />
         <Suspense fallback="Loading...">
           <Providers>{children}</Providers>
         </Suspense>

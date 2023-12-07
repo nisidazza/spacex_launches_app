@@ -10,14 +10,14 @@ export default function NavBar() {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      p={8}
-      color={["white", "white", "primary.700", "primary.700"]}
-      bg={
-        "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,0.9822522759103641) 35%, rgba(55,159,210,0.9822522759103641) 52%)"
-      }
+      p={6}
+      bg={"rgba(0, 0, 0, 0.5)"}
     >
+      {/* @ts-expect-error Server Component */}
       <AuthStatus />
       <SignOut />
     </Flex>
   );
 }
+
+//#0d0d0d,#000066, #800080, #cc4400

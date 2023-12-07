@@ -13,6 +13,7 @@ import {
   Container,
   Grid,
   GridItem,
+  HStack,
   Heading,
   Image,
   Img,
@@ -20,10 +21,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { format } from "date-fns";
+import Moment from "moment";
 import NextLink from "next/link";
 import { FaYoutube } from "react-icons/fa";
-import { MdFavorite } from "react-icons/md";
 
 export default async function Launches() {
   const { loading, error, data } = await getClient().query({
@@ -56,7 +56,7 @@ export default async function Launches() {
         {launches.map((launch) => (
           <GridItem w="100%" key={launch.id}>
             <Card>
-              <Box maxW="sm" height={"300px"} overflow="hidden">
+              <Box height={"300px"} overflow="hidden">
                 <Image
                   boxSize="100%"
                   src={launch.links.flickr_images[0]}
@@ -73,34 +73,37 @@ export default async function Launches() {
                 />
               </Box>
 
-              <CardBody>
+              <CardBody bgColor={"white"}>
                 <Stack mt="0" spacing="2">
                   <Box display="flex" justifyContent={"space-between"}>
                     <Heading size="md">{launch.mission_name}</Heading>
-                    <MdFavorite />
+                    {/* <MdFavorite /> */}
                   </Box>
 
                   <Box display="flex" alignItems="baseline">
-                    <Box fontWeight="bold" color="gray.600">
-                      Launch Date:{" "}
-                    </Box>
-                    <Text fontWeight="semibold">
-                      {format(
-                        new Date(launch.launch_date_utc),
-                        "dd MMMM yyyy HH:mm"
-                      )}
-                    </Text>
+                    <HStack>
+                      <Box fontWeight="bold" color="gray.600">
+                        Launch Date:
+                      </Box>
+                      <Text fontWeight="semibold">
+                        {Moment(launch.launch_date_utc).format(
+                          "MMM Do YYYY, h:mm:ss a"
+                        )}
+                      </Text>
+                    </HStack>
                   </Box>
                   <Box display="flex" alignItems="baseline">
-                    <Box fontWeight="bold" color="gray.600">
-                      Rocket:{" "}
-                    </Box>
-                    <Text fontWeight="semibold">
-                      {launch.rocket.rocket_name}
-                    </Text>
+                    <HStack>
+                      <Box fontWeight="bold" color="gray.600">
+                        Rocket:{" "}
+                      </Box>
+                      <Text fontWeight="semibold">
+                        {launch.rocket.rocket_name}
+                      </Text>
+                    </HStack>
                   </Box>
                   <Link as={NextLink} href={launch.links.video_link} isExternal>
-                    <FaYoutube />
+                    <FaYoutube color="red" size={"30px"} />
                   </Link>
                 </Stack>
               </CardBody>
