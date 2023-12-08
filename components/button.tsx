@@ -9,6 +9,7 @@ export default function Button(props: Button) {
   const { loading, label } = props;
   return (
     <button
+      aria-label={label}
       disabled={loading}
       className={`${
         loading
