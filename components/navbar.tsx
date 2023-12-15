@@ -1,8 +1,13 @@
+import { authOptions } from "@/lib/auth";
 import { Flex } from "@chakra-ui/react";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
+import { FaHome } from "react-icons/fa";
 import AuthStatus from "./auth-status";
 import Profile from "./profile";
 
-export default function NavBar() {
+export default async function NavBar() {
+  const session = await getServerSession(authOptions);
   return (
     <Flex
       as="nav"
@@ -13,10 +18,11 @@ export default function NavBar() {
       p={6}
       bg={"rgba(0, 0, 0, 0.5)"}
     >
-      {/* @ts-expect-error Server Component */}
+      <Link href="/">
+        <FaHome color="white" fontSize="30px" />
+      </Link>
       <AuthStatus />
-      {/* @ts-expect-error Server Component */}
-      <Profile />
+      {session?.user ? <Profile /> : <span />}
     </Flex>
   );
 }

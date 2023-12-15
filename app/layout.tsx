@@ -1,4 +1,5 @@
 // These styles apply to every route in the application
+import NavBar from "@/components/navbar";
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
@@ -50,9 +51,12 @@ export default async function RootLayout({
         style={style}
         className={`${openSans.variable} ${robotoMono.variable} font-sans`}
       >
-        <Toaster />
         <Suspense fallback="Loading...">
-          <Providers>{children}</Providers>
+          <Providers>
+            <NavBar />
+            {children}
+            <Toaster />
+          </Providers>
         </Suspense>
       </body>
     </html>
