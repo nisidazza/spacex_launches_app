@@ -1,29 +1,36 @@
-import prisma from "@/lib/prisma";
-import { hash } from "bcrypt";
+import { db } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function PATCH(req: Request) {
-  const { user_name, password, job_title } = await req.json();
-  const exists = await prisma.user.findUnique({
-    where: {
-      user_name,
-    },
-  });
-  if (!exists) {
-    return NextResponse.json(
-      { error: "User does not exist!" },
-      { status: 400 }
-    );
-  } else {
-    const user = await prisma.user.update({
-      where: {
-        user_name,
-      },
-      data: {
-        password: await hash(password, 10),
-        job_title,
-      },
+  try {
+    const { username, email, password, job_title } = await req.json();
+
+    const existingUsername = await db.user.findUnique({
+      where: { username: username },
     });
-    return NextResponse.json(user);
+
+    if (existingUsername) {
+      return NextResponse.json(
+        { user: null, message: "Username already exists" },
+        { status: 409, statusText: "Username already exists" }
+      );
+    } else {
+      const updatedUser = await db.user.update({
+        where: { email: email },
+        data: {
+          username,
+          job_title,
+        },
+      });
+      return NextResponse.json(
+        { user: updatedUser, message: "User updated successfully" },
+        { status: 201 }
+      );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Something went wrong" },
+      { status: 500 }
+    );
   }
 }
