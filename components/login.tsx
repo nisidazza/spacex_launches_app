@@ -1,24 +1,44 @@
 "use client";
 
-import { Box, Center, Link, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  FormControl,
+  FormLabel,
+  Input,
+  Link,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Button from "./button";
-import Field from "./field";
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (values: FormValues) => {
     setLoading(true);
     signIn("credentials", {
       redirect: false,
-      user_name: e.currentTarget.user_name.value,
-      password: e.currentTarget.password.value,
+      email: values.email,
+      password: values.password,
       // @ts-ignore
     }).then(({ error }) => {
       if (error) {
@@ -33,19 +53,23 @@ export default function Login() {
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={form.handleSubmit(onSubmit)}
       style={{ backgroundColor: "rgb(249 250 251)", padding: "50px" }}
     >
       <Stack spacing={4}>
-        <Field
-          id="user_name"
-          name="user_name"
-          type="email"
-          placeholder="panic@thedis.co"
-          autoComplete="email"
-          label="Username"
-        />
-        <Field id="password" name="password" type="password" label="Password" />
+        <FormControl>
+          <FormLabel>Email</FormLabel>
+          <Input
+            id="email"
+            type="email"
+            placeholder="mail@example.com"
+            {...form.register("email")}
+          />
+        </FormControl>
+        <FormControl>
+          <FormLabel>Password</FormLabel>
+          <Input id="password" type="password" {...form.register("password")} />
+        </FormControl>
       </Stack>
       <Box pt="30px">
         <Stack spacing={5}>
