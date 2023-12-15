@@ -51,7 +51,9 @@ export default async function RootLayout({
         style={style}
         className={`${openSans.variable} ${robotoMono.variable} font-sans`}
       >
-        <Suspense fallback="Loading...">
+        <Suspense
+          fallback={<p className="text-white font-bold text-2xl">Loading...</p>}
+        >
           <Providers>
             <NavBar />
             {children}
