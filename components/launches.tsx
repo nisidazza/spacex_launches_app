@@ -41,10 +41,7 @@ export default async function Launches() {
       </Alert>
     );
 
-  var launches = data.launchesPast as Launch[];
-  launches = launches.filter(
-    (launch) => launch.links.flickr_images.length > 0 && launch.links.video_link
-  );
+  const launches = data.launchesPast as Launch[];
 
   return (
     <Container maxW={"100%"} centerContent mt="50px">
@@ -76,10 +73,13 @@ export default async function Launches() {
               <CardBody bgColor={"white"}>
                 <Stack mt="0" spacing="2">
                   <Box display="flex" justifyContent={"space-between"}>
-                    <Heading size="md">{launch.mission_name}</Heading>
-                    {/* <MdFavorite /> */}
+                    <Heading
+                      size={launch.mission_name.length > 40 ? "xs" : "sm"}
+                      fontWeight="bold"
+                    >
+                      {launch.mission_name}
+                    </Heading>
                   </Box>
-
                   <Box display="flex" alignItems="baseline">
                     <HStack>
                       <Box fontWeight="bold" color="gray.600">
@@ -87,7 +87,7 @@ export default async function Launches() {
                       </Box>
                       <Text fontWeight="semibold">
                         {Moment(launch.launch_date_utc).format(
-                          "MMM Do YYYY, h:mm:ss a"
+                          "MM/DD/YYYY, h:mm:ss a"
                         )}
                       </Text>
                     </HStack>
@@ -102,9 +102,31 @@ export default async function Launches() {
                       </Text>
                     </HStack>
                   </Box>
-                  <Link as={NextLink} href={launch.links.video_link} isExternal>
-                    <FaYoutube color="red" size={"30px"} title="youtube-icon" />
-                  </Link>
+                  {launch.links.video_link ? (
+                    <Link
+                      as={NextLink}
+                      href={launch.links.video_link}
+                      isExternal
+                    >
+                      <FaYoutube
+                        color="red"
+                        size={"30px"}
+                        title="launch-video"
+                      />
+                    </Link>
+                  ) : (
+                    <Link
+                      as={NextLink}
+                      href={""}
+                      style={{ pointerEvents: "none" }}
+                    >
+                      <FaYoutube
+                        color="grey"
+                        size="30px"
+                        title="youtube-icon"
+                      />
+                    </Link>
+                  )}
                 </Stack>
               </CardBody>
             </Card>
