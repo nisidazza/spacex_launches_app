@@ -15,15 +15,33 @@ import {
   GridItem,
   HStack,
   Heading,
-  Image,
-  Img,
   Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import Moment from "moment";
+import Image from "next/image";
 import NextLink from "next/link";
 import { FaYoutube } from "react-icons/fa";
+
+const shimmer = (w: number, h: number) => `
+<svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="g">
+      <stop stop-color="#333" offset="20%" />
+      <stop stop-color="#222" offset="50%" />
+      <stop stop-color="#333" offset="70%" />
+    </linearGradient>
+  </defs>
+  <rect width="${w}" height="${h}" fill="#333" />
+  <rect id="r" width="${w}" height="${h}" fill="url(#g)" />
+  <animate xlink:href="#r" attributeName="x" from="-${w}" to="${w}" dur="1s" repeatCount="indefinite"  />
+</svg>`;
+
+const toBase64 = (str: string) =>
+  typeof window === "undefined"
+    ? Buffer.from(str).toString("base64")
+    : window.btoa(str);
 
 export default async function Launches() {
   const { loading, error, data } = await getClient().query({
@@ -53,21 +71,35 @@ export default async function Launches() {
         {launches.map((launch) => (
           <GridItem w="100%" key={launch.id}>
             <Card>
-              <Box height={"300px"} overflow="hidden">
-                <Image
-                  boxSize="100%"
-                  src={launch.links.flickr_images[0]}
-                  alt={launch.mission_name}
-                  objectFit="fill"
-                  fallback={
-                    <Img
-                      boxSize="100%"
-                      src={"/rocket_station_placeholder.jpeg"}
-                      alt={launch.mission_name}
-                      objectFit="fill"
-                    />
-                  }
-                />
+              <Box
+                height="300px"
+                width="inherit"
+                overflow="hidden"
+                position="relative"
+              >
+                {launch.links.flickr_images[0] ? (
+                  <Image
+                    src={launch.links.flickr_images[0]}
+                    alt={launch.mission_name}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    fill
+                    placeholder={`data:image/svg+xml;base64,${toBase64(
+                      shimmer(700, 475)
+                    )}`}
+                    style={{
+                      objectFit: "fill",
+                    }}
+                  />
+                ) : (
+                  <Image
+                    src="/rocket_station_placeholder.jpeg"
+                    alt={launch.mission_name}
+                    width={400}
+                    height={400}
+                    style={{ objectFit: "fill", height: "100%" }}
+                    priority={true}
+                  />
+                )}
               </Box>
 
               <CardBody bgColor={"white"}>
