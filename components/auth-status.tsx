@@ -3,8 +3,8 @@
 import { Text } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 
-export default async function AuthStatus() {
-  const { data: session } = await useSession();
+export default function AuthStatus() {
+  const { data: session } = useSession();
   return (
     <div>
       {session?.user && (
