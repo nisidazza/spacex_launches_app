@@ -8,12 +8,7 @@ export default function AuthStatus() {
   return (
     <div>
       {session?.user && (
-        <Text
-          color={"white"}
-          fontWeight={"bold"}
-          display={"initial"}
-          fontSize="xl"
-        >
+        <Text color="white" fontWeight="bold" display="initial" fontSize="xl">
           Welcome {session.user?.username}, {session.user.job_title}!
         </Text>
       )}

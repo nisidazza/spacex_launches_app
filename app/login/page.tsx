@@ -1,4 +1,4 @@
-import Login from "@/components/login";
+import Login from "@/components/form/login";
 import { Box, Center, Container, Text } from "@chakra-ui/layout";
 
 export default function SignIn() {

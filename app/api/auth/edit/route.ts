@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function PATCH(req: Request) {
   try {
-    const { username, email, password, job_title } = await req.json();
+    const { username, email, job_title } = await req.json();
 
     const existingUsername = await db.user.findUnique({
       where: { username: username },

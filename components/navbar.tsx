@@ -15,7 +15,7 @@ export default async function NavBar() {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      p={6}
+      p={3}
       bg={"rgba(0, 0, 0, 0.5)"}
     >
       <Link href="/">

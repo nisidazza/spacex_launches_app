@@ -62,7 +62,7 @@ export default async function Launches() {
   const launches = data.launchesPast as Launch[];
 
   return (
-    <Container maxW={"100%"} centerContent mt="50px">
+    <Container maxW={"100%"} centerContent mt="50px" overflowY="auto">
       <Grid
         h="100vh"
         templateColumns={{ base: "1fr", md: "1fr 1fr", lg: "1fr 1fr 1fr 1fr" }}

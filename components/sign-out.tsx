@@ -5,7 +5,10 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 export default function SignOut() {
   return (
-    <MenuItem icon={<IoLogOutOutline size="20px" />} onClick={() => signOut()}>
+    <MenuItem
+      icon={<IoLogOutOutline size="20px" />}
+      onClick={() => signOut({ redirect: true })}
+    >
       Sign out
     </MenuItem>
   );

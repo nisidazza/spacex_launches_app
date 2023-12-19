@@ -33,13 +33,6 @@ export const metadata: Metadata = {
   themeColor: "#FFF",
 };
 
-const style = {
-  minHeight: "100vh",
-  backgroundImage: `url(${backgroundImage.src})`,
-  backgroundPosition: "center",
-  backgroundSize: "cover",
-};
-
 export default async function RootLayout({
   children,
 }: {
@@ -48,7 +41,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        style={style}
+        style={{
+          minHeight: "100vh",
+          backgroundImage: `url(${backgroundImage.src})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          overflowY: "hidden",
+        }}
         className={`${openSans.variable} ${robotoMono.variable} font-sans`}
       >
         <Suspense

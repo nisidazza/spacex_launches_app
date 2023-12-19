@@ -1,4 +1,4 @@
-import Register from "@/components/register";
+import Register from "@/components/form/register";
 import { Box, Center, Container, Text } from "@chakra-ui/layout";
 
 export default function SignUp() {
