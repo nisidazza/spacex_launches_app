@@ -5,8 +5,7 @@
     "build": "prisma generate && prisma db push && next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch",
-    "prisma-migrate": "npx prisma migrate dev"
+    "test": "jest --watch"
   },
   "dependencies": {
     "@apollo/client": "^3.8.0-rc.2",
