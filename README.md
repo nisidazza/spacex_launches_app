@@ -30,4 +30,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deployment
 
-This app is deployed to Vercel [https://leonardo-ai-challenge.vercel.app/](https://leonardo-ai-challenge.vercel.app/)
+This app is deployed to Vercel [https://nextjs-spacex-launches.vercel.app/](https://nextjs-spacex-launches.vercel.app/)
