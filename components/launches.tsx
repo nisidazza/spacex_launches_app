@@ -1,4 +1,4 @@
-import { getClient } from "@/app/graphql/client";
+import {createApolloClient} from "@/app/graphql/client";
 import { query } from "@/app/graphql/query";
 import { Launch } from "@/app/graphql/types";
 import {
@@ -44,7 +44,8 @@ const toBase64 = (str: string) =>
     : window.btoa(str);
 
 export default async function Launches() {
-  const { loading, error, data } = await getClient().query({
+  const client = createApolloClient();
+  const { loading, error, data } = await client.query({
     query,
     context: { fetchOptions: { next: { revalidate: 5 } } },
   });
