@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     title,
   },
   metadataBase: new URL("https://nextjs-postgres-auth.vercel.app"),
-  themeColor: "#FFF",
+  // themeColor moved to viewport.ts per Next.js requirements
 };
 
 export default async function RootLayout({
