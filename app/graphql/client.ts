@@ -4,7 +4,7 @@ export const createApolloClient = () => {
   return new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
-      uri: "https://main--spacex-l4uc6p.apollographos.net/graphql",
+      uri: "https://spacex-production.up.railway.app/",
     }),
   });
 };
