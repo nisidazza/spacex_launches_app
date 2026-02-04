@@ -1,4 +1,4 @@
-import {createApolloClient} from "@/app/graphql/client";
+import { createApolloClient } from "@/app/graphql/client";
 import { query } from "@/app/graphql/query";
 import { Launch } from "@/app/graphql/types";
 import {
@@ -136,29 +136,25 @@ export default async function Launches() {
                     </HStack>
                   </Box>
                   {launch.links.video_link ? (
-                    <Link
-                      as={NextLink}
-                      href={launch.links.video_link}
-                      isExternal
-                    >
-                      <FaYoutube
-                        color="red"
-                        size={"30px"}
-                        title="launch-video"
-                      />
-                    </Link>
+                    <NextLink href={launch.links.video_link} legacyBehavior>
+                      <Link isExternal>
+                        <FaYoutube
+                          color="red"
+                          size={"30px"}
+                          title="launch-video"
+                        />
+                      </Link>
+                    </NextLink>
                   ) : (
-                    <Link
-                      as={NextLink}
-                      href={""}
-                      style={{ pointerEvents: "none" }}
-                    >
-                      <FaYoutube
-                        color="grey"
-                        size="30px"
-                        title="youtube-icon"
-                      />
-                    </Link>
+                    <NextLink href={""} legacyBehavior>
+                      <Link style={{ pointerEvents: "none" }}>
+                        <FaYoutube
+                          color="grey"
+                          size="30px"
+                          title="youtube-icon"
+                        />
+                      </Link>
+                    </NextLink>
                   )}
                 </Stack>
               </CardBody>
