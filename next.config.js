@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const path = require('path')
+
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
@@ -11,6 +13,10 @@ const nextConfig = {
         port: "",
       },
     ],
+  },
+  turbopack: {
+    // ensure Turbopack uses this app directory as the workspace root
+    root: path.resolve(__dirname),
   },
 };
 
