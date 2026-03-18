@@ -1,11 +1,4 @@
-import { createApolloClient } from "@/app/graphql/client";
-import { query } from "@/app/graphql/query";
-import { Launch } from "@/app/graphql/types";
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Box,
   Card,
   CardBody,
@@ -17,11 +10,12 @@ import {
   Heading,
   Link,
   Stack,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import Moment from "moment";
 import Image from "next/image";
 import NextLink from "next/link";
+import { useEffect, useState } from "react";
 import { FaYoutube } from "react-icons/fa";
 
 const shimmer = (w: number, h: number) => `
@@ -43,24 +37,41 @@ const toBase64 = (str: string) =>
     ? Buffer.from(str).toString("base64")
     : window.btoa(str);
 
-export default async function Launches() {
-  const client = createApolloClient();
-  const { loading, error, data } = await client.query({
-    query,
-    context: { fetchOptions: { next: { revalidate: 5 } } },
-  });
+export default function Launches() {
+  // const client = createApolloClient();
+  // const { loading, error, data } = await client.query({
+  //   query,
+  //   context: { fetchOptions: { next: { revalidate: 5 } } },
+  // });
+
+  const [launches, setLaunches] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("https://api.spacexdata.com/v3/launches/past")
+      .then(res => res.json())
+      .then(data => {
+        setLaunches(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Failed to fetch launches:", err);
+        setLoading(false);
+      });
+  }, []);
+
 
   if (loading) return <CircularProgress isIndeterminate />;
-  if (error)
-    return (
-      <Alert status="error">
-        <AlertIcon />
-        <AlertTitle>{error.name}</AlertTitle>
-        <AlertDescription>{error.message}</AlertDescription>
-      </Alert>
-    );
+  // if (error)
+  //   return (
+  //     <Alert status="error">
+  //       <AlertIcon />
+  //       <AlertTitle>{error.name}</AlertTitle>
+  //       <AlertDescription>{error.message}</AlertDescription>
+  //     </Alert>
+  //   );
 
-  const launches = data.launchesPast as Launch[];
+  // const launches = data.launchesPast as Launch[];
 
   return (
     <Container maxW={"100%"} centerContent mt="50px" overflowY="auto">

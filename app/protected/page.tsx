@@ -1,3 +1,5 @@
+"use client";
+
 import Launches from "@/components/launches";
 import { Flex } from "@chakra-ui/react";
 import { Suspense } from "react";
